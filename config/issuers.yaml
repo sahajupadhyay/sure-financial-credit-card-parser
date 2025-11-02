@@ -1,0 +1,36 @@
+issuers:
+  hdfc:
+    keywords: ["hdfc", "hdfc bank", "hdb financial"]
+    last4_pattern: "Card No[:\\s]+\\d{4}\\s+\\d{2}XX\\s+XXXX\\s+(\\d{4})"
+    due_date_pattern: "Payment Due Date.*?(\\d{2}/\\d{2}/\\d{4})"
+    balance_pattern: "Total Dues.*?([\\d,]+\\.\\d{2})"
+    cycle_pattern: "Statement Date[:\\s]*(\\d{2}/\\d{2}/\\d{4})"
+    
+  icici:
+    keywords: ["icici", "icici bank", "icici credit card"]
+    last4_pattern: "(\\d{4})XXXXXXXX(\\d{4})|(?:Card No|Card Number)[:\\s]*.*?(?:XXXX|\\*{4})[\\s-]*(\\d{4})"
+    due_date_pattern: "PAYMENT DUE DATE[\\s\\S]*?([A-Za-z]+ \\d{1,2}, \\d{4})|(?:Due Date|Payment Due)[:\\s]*([A-Za-z]+ \\d{1,2}, \\d{4}|\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    balance_pattern: "Total Amount due[\\s\\S]*?`([\\d,]+\\.\\d{2})|(?:Total Amount Due|Amount Due|Outstanding)[:\\s]*(?:Rs\\.?|INR|₹|`)?\\s*([\\d,]+\\.?\\d{0,2})"
+    cycle_pattern: "(?:Statement Date|Statement Period)[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4}).*?to.*?(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    
+  sbi:
+    keywords: ["sbi", "state bank", "state bank of india"]
+    last4_pattern: "(?:Card No|Card Number)[:\\s]*.*?(?:XXXX|\\*{4})[\\s-]*(\\d{4})"
+    due_date_pattern: "(?:Payment Due Date|Due Date)[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    balance_pattern: "(?:Total Amount Due|Outstanding Amount)[:\\s]*(?:Rs\\.?|INR|₹)?\\s*([\\d,]+\\.?\\d{0,2})"
+    cycle_pattern: "(?:Statement Period)[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4}).*?to.*?(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    
+  axis:
+    keywords: ["axis", "axis bank", "axis credit card"]
+    last4: "(?:Card No|Card Number)[:\\s]*.*?(?:XXXX|\\*{4})[\\s-]*(\\d{4})"
+    due_date: "(?:Payment Due Date|Due Date)[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    balance: "(?:Total Amount Due|Outstanding)[:\\s]*(?:Rs\\.?|INR|₹)?\\s*([\\d,]+\\.?\\d{0,2})"
+    cycle: "(?:Statement Date|Billing Period)[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    
+  # Generic fallback patterns - work with most bank formats
+  generic:
+    keywords: ["credit card", "statement", "card number"]
+    last4: "(?:Card\\s+(?:No|Number)|Account)[:\\s]*.*?(?:XXXX|\\*{4}|X{4})[\\s-]*(\\d{4})"
+    due_date: "(?:Due\\s+Date|Payment\\s+Due|Pay\\s+by)[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
+    balance: "(?:Total\\s+(?:Amount\\s+)?Due|Outstanding\\s+(?:Amount|Balance)|Amount\\s+Due|Current\\s+Balance)[:\\s]*(?:Rs\\.?|INR|₹)?\\s*([\\d,]+\\.?\\d{0,2})"
+    cycle: "(?:Statement\\s+(?:Date|Period)|Billing\\s+(?:Date|Period|Cycle))[:\\s]*(\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})"
